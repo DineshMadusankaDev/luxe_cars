@@ -9,10 +9,11 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // මුළු පිටුවම කළු පාටයි
-      // උඩින්ම තියෙන AppBar එක (Back Button & Heart Icon)
+      backgroundColor: Colors.black,
+
+      // AppBar with transparent background
       appBar: AppBar(
-        backgroundColor: Colors.transparent, // විනිවිද පෙනෙනවා
+        backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
@@ -29,20 +30,20 @@ class DetailsScreen extends StatelessWidget {
       body: Column(
         children: [
           // ----------------------------------------
-          // 1. කාර් එකේ පින්තූරය සහ නම (උඩ කොටස)
+          // TOP SECTION: Car Image & Title
           // ----------------------------------------
           Expanded(
-            flex: 5, // ඉඩ ප්‍රමාණය
+            flex: 5,
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                // කාර් එකේ පාටට අනුව පොඩි Gradient එකක් (Background Glow)
+                // Subtle gradient background matching the car color
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.black,
-                    car.color.withOpacity(0.3), // කාර් එකේ පාට
+                    car.color.withOpacity(0.3),
                     Colors.black,
                   ],
                 ),
@@ -50,7 +51,7 @@ class DetailsScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Hero Animation (Home එකේ ඉඳන් කාර් එක පාවෙලා එනවා)
+                  // Hero Animation for seamless transition
                   Hero(
                     tag: car.imagePath,
                     child: Image.asset(
@@ -61,7 +62,7 @@ class DetailsScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
 
-                  // Brand Name (TOYOTA)
+                  // Car Brand
                   Text(
                     car.brand.toUpperCase(),
                     style: TextStyle(
@@ -71,7 +72,7 @@ class DetailsScreen extends StatelessWidget {
                     ),
                   ),
 
-                  // Model Name (Land Cruiser 300)
+                  // Car Model
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
@@ -90,14 +91,14 @@ class DetailsScreen extends StatelessWidget {
           ),
 
           // ----------------------------------------
-          // 2. විස්තර සහ Booking Button (යට කොටස)
+          // BOTTOM SECTION: Specs & Actions
           // ----------------------------------------
           Expanded(
             flex: 4,
             child: Container(
               padding: EdgeInsets.all(25),
               decoration: BoxDecoration(
-                color: Colors.grey[900], // තද අළු පාට පසුබිමක්
+                color: Colors.grey[900],
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40),
                   topRight: Radius.circular(40),
@@ -106,7 +107,7 @@ class DetailsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Specifications (වේගය, බලය වගේ දේවල් පෙන්නන පෙට්ටි)
+                  // Specifications Row
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -117,7 +118,7 @@ class DetailsScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 25),
 
-                  // Description Title
+                  // Description
                   Text(
                     "Description",
                     style: TextStyle(
@@ -127,8 +128,6 @@ class DetailsScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10),
-
-                  // Description Text
                   Text(
                     "Experience the ultimate luxury with the ${car.brand} ${car.model}. A perfect combination of high performance and comfort.",
                     style: TextStyle(
@@ -138,14 +137,14 @@ class DetailsScreen extends StatelessWidget {
                     ),
                   ),
 
-                  Spacer(), // ඉතුරු ඉඩ ටික පල්ලෙහාට යවනවා
-                  // Book Test Drive Button
+                  Spacer(),
+
+                  // Action Button
                   SizedBox(
                     width: double.infinity,
                     height: 55,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Booking function එක පස්සේ දාමු
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text("Booking Feature coming soon!"),
@@ -153,7 +152,7 @@ class DetailsScreen extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: car.color, // කාර් එකේ පාටින් බටන් එක
+                        backgroundColor: car.color,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -178,7 +177,7 @@ class DetailsScreen extends StatelessWidget {
     );
   }
 
-  // පොඩි කොටු (Specs Cards) හදන Function එක
+  // Helper widget to build specification cards
   Widget _buildSpecCard(String title, String value) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),

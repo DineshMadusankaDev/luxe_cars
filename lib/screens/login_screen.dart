@@ -6,13 +6,13 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // මුළු පිටුවම කළු පාටයි
+      backgroundColor: Colors.black, // Main background color
       appBar: AppBar(
-        backgroundColor: Colors.transparent, // උඩ තීරුව විනිවිද පෙනෙනවා
+        backgroundColor: Colors.transparent, // Transparent AppBar
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context), // ආපහු Home එකට යන්න
+          onPressed: () => Navigator.pop(context), // Go back to previous screen
         ),
       ),
       body: Padding(
@@ -21,12 +21,12 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // උඩ තියෙන LUXE MOTORS ලාංඡනය
+            // --- TOP BRAND BADGE ---
             Center(
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withOpacity(0.2), // Glassmorphism effect
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 40),
 
-            // Welcome Back පාඨය
+            // --- WELCOME TEXT ---
             Text(
               "Welcome Back",
               style: TextStyle(
@@ -64,7 +64,7 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 50),
 
-            // Email Input Field
+            // --- EMAIL INPUT ---
             TextField(
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
@@ -81,9 +81,9 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
 
-            // Password Input Field
+            // --- PASSWORD INPUT ---
             TextField(
-              obscureText: true, // පාස්වර්ඩ් එක හංගන්න
+              obscureText: true, // Hide password text
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.lock_outline, color: Colors.grey),
@@ -112,14 +112,14 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 30),
 
-            // Sign In Button
+            // --- SIGN IN BUTTON ---
             SizedBox(
               width: double.infinity,
               height: 55,
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.redAccent, // රතු පාට බටන් එක
+                  backgroundColor: Colors.redAccent, // Primary accent color
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
@@ -135,7 +135,7 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
 
-            // Sign Up Link (පහළින්)
+            // --- SIGN UP LINK ---
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

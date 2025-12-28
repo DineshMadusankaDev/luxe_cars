@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/car.dart';
 import 'details_screen.dart';
-import 'login_screen.dart'; // 1. අලුතින් එකතු කරපු import එක
+import 'login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,25 +11,32 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // Initial background color based on the first car
   Color _backgroundColor = carList[0].color;
+
+  // Variable to track the current page index for the slider
   int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // AnimatedContainer used for smooth background color transitions
       body: AnimatedContainer(
         duration: Duration(seconds: 1),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [_backgroundColor, Colors.black],
+            colors: [
+              _backgroundColor,
+              Colors.black, // Fade to black at the bottom
+            ],
           ),
         ),
         child: SafeArea(
           child: Column(
             children: [
-              // --- TOP BAR ---
+              // --- TOP BAR SECTION ---
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20.0,
@@ -42,13 +49,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       icon: Icon(Icons.arrow_back, color: Colors.white),
                       onPressed: () {},
                     ),
+                    // Brand Logo Container
                     Container(
                       padding: EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 8,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withOpacity(
+                          0.2,
+                        ), // Glassmorphism effect
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
@@ -60,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           SizedBox(width: 8),
                           Text(
-                            "LUXE CARS",
+                            "LUXE MOTORS",
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -80,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               SizedBox(height: 10),
 
-              // --- TITLE ---
+              // --- MAIN TITLE SECTION ---
               Text(
                 "Find Your",
                 style: TextStyle(
@@ -97,6 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontWeight: FontWeight.w900,
                 ),
               ),
+              // Decorative line under the title
               Container(
                 margin: EdgeInsets.only(top: 5, bottom: 20),
                 height: 3,
@@ -107,12 +118,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              // --- CAR SLIDER ---
+              // --- CAR SLIDER (PAGEVIEW) ---
               Expanded(
                 child: PageView.builder(
                   itemCount: carList.length,
                   onPageChanged: (index) {
                     setState(() {
+                      // Update background color and index on slide
                       _backgroundColor = carList[index].color;
                       _currentIndex = index;
                     });
@@ -122,6 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     return GestureDetector(
                       onTap: () {
+                        // Navigate to Details Screen on tap
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -132,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          // Brand Name Box
+                          // Brand Name Badge
                           Container(
                             margin: EdgeInsets.symmetric(vertical: 20),
                             padding: EdgeInsets.symmetric(
@@ -154,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
 
-                          // Car Image
+                          // Car Image with Hero Animation
                           Expanded(
                             child: Hero(
                               tag: car.imagePath,
@@ -165,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
 
-                          // Details
+                          // Car Model and Price Information
                           Padding(
                             padding: const EdgeInsets.only(bottom: 20.0),
                             child: Column(
@@ -196,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              // --- DOTS INDICATOR ---
+              // --- DOT INDICATORS ---
               Padding(
                 padding: const EdgeInsets.only(bottom: 30.0),
                 child: Row(
@@ -208,10 +221,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              // --- 2. EXPLORE BUTTON (මෙන්න මෙතන තමයි අපි වෙනස් කලේ) ---
+              // --- EXPLORE BUTTON ---
               GestureDetector(
                 onTap: () {
-                  // Login Screen එකට යන කෝඩ් එක
+                  // Navigate to Login/Welcome Screen
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -250,11 +263,13 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // Method to build the animated pagination dots
   Widget buildDot(int index, BuildContext context) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 300),
       margin: EdgeInsets.only(right: 5),
       height: 6,
+      // Change width if the dot is active
       width: _currentIndex == index ? 25 : 6,
       decoration: BoxDecoration(
         color: _currentIndex == index ? Colors.white : Colors.white38,
